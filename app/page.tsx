@@ -6,7 +6,7 @@ import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
 import { Badge } from "@/components/ui/badge"
-import { Timer, Award, Twitter } from "lucide-react"
+import { Timer, Award, Twitter, Copy } from "lucide-react"
 import Image from "next/image"
 import { VT323 } from "next/font/google"
 
@@ -51,6 +51,8 @@ export default function LumberjackGame() {
   const [popups, setPopups] = useState<Popup[]>([])
   const [coins, setCoins] = useState<Coin[]>([])
   const [treeShake, setTreeShake] = useState(false)
+  const [showCopied, setShowCopied] = useState(false)
+  const contractAddress = "0x000000000000000000000000000000000000dEaD"
   const popupIdRef = useRef(0)
   const coinIdRef = useRef(0)
   const gameAreaRef = useRef<HTMLDivElement>(null)
@@ -376,6 +378,12 @@ export default function LumberjackGame() {
     }
   }, [gameOver, score, treesChopped])
 
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(contractAddress)
+    setShowCopied(true)
+    setTimeout(() => setShowCopied(false), 2000)
+  }
+
   return (
     <div className={`relative flex min-h-screen flex-col items-center justify-center p-4 ${vt323.className}`}>
       {/* Full-screen background image */}
@@ -389,7 +397,7 @@ export default function LumberjackGame() {
         />
       </div>
 
-      <div className="mb-8 text-center">
+      <div className="mb-16 text-center relative">
         {/* Wooden Title Logo - Made bigger */}
         <div className="relative w-[450px] h-[250px] mx-auto">
           <Image
@@ -400,16 +408,6 @@ export default function LumberjackGame() {
           />
         </div>
       </div>
-
-      {/* X icon */}
-      <a
-        href="https://www.x.com/lumberCoin_"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="absolute top-4 right-4 z-[100] flex items-center justify-center w-12 h-12 rounded-full bg-amber-900/80 hover:bg-amber-800/90 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110"
-      >
-        <Twitter className="w-8 h-8 text-white" />
-      </a>
 
       {!gameStarted && !gameOver && (
         <div className="relative flex justify-center items-center">
@@ -457,7 +455,7 @@ export default function LumberjackGame() {
       )}
 
       {gameStarted && (
-        <div className="flex gap-8 items-start mt-[-100px]">
+        <div className="flex gap-8 items-start mt-[-50px]">
           <div
             className="relative w-full max-w-4xl outline-none"
             ref={gameAreaRef}
@@ -620,6 +618,31 @@ export default function LumberjackGame() {
 
           {/* Highscores section */}
           <div className="relative w-[1200px] h-[1200px] mt-[-250px]">
+            {/* Contract Address and X Icon Section */}
+            <div className="absolute top-[200px] left-1/2 -translate-x-1/2 z-[100] flex items-center justify-center gap-4">
+              <a
+                href="https://www.x.com/lumberCoin_"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center w-12 h-12 rounded-full bg-amber-900/90 hover:bg-amber-800/90 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110"
+              >
+                <Twitter className="w-8 h-8 text-white" />
+              </a>
+              <div 
+                onClick={copyToClipboard}
+                className="flex items-center gap-2 px-6 py-3 rounded-lg bg-amber-900/90 hover:bg-amber-800/90 transition-all duration-300 cursor-pointer group shadow-lg hover:shadow-xl"
+              >
+                <span className="text-white font-bold text-xl">CA:</span>
+                <span className="text-amber-200 font-mono text-xl">{contractAddress}</span>
+                <Copy className="w-5 h-5 text-amber-200 opacity-0 group-hover:opacity-100 transition-opacity" />
+              </div>
+              {showCopied && (
+                <div className="absolute -top-12 left-1/2 -translate-x-1/2 px-4 py-2 bg-green-500 text-white rounded-lg animate-fade-out text-lg">
+                  Copied!
+                </div>
+              )}
+            </div>
+
             <Image
               src="/images/highscores.png"
               alt="Highscores Board"
