@@ -407,6 +407,15 @@ export default function LumberjackGame() {
             className="object-contain drop-shadow-lg"
           />
         </div>
+        {/* X icon */}
+        <a
+          href="https://www.x.com/lumberCoin_"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="absolute right-8 top-1/2 -translate-y-1/2 z-[100] flex items-center justify-center w-12 h-12 rounded-full bg-amber-900/90 hover:bg-amber-800/90 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110"
+        >
+          <Twitter className="w-8 h-8 text-white" />
+        </a>
       </div>
 
       {!gameStarted && !gameOver && (
@@ -620,14 +629,6 @@ export default function LumberjackGame() {
           <div className="relative w-[1200px] h-[1200px] mt-[-250px]">
             {/* Contract Address and X Icon Section */}
             <div className="absolute top-[200px] left-1/2 -translate-x-1/2 z-[100] flex items-center justify-center gap-4">
-              <a
-                href="https://www.x.com/lumberCoin_"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center w-12 h-12 rounded-full bg-amber-900/90 hover:bg-amber-800/90 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110"
-              >
-                <Twitter className="w-8 h-8 text-white" />
-              </a>
               <div 
                 onClick={copyToClipboard}
                 className="flex items-center gap-2 px-6 py-3 rounded-lg bg-amber-900/90 hover:bg-amber-800/90 transition-all duration-300 cursor-pointer group shadow-lg hover:shadow-xl"
