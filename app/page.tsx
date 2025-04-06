@@ -389,7 +389,7 @@ export default function LumberjackGame() {
         />
       </div>
 
-      <div className="mb-8 text-center relative">
+      <div className="mb-8 text-center">
         {/* Wooden Title Logo - Made bigger */}
         <div className="relative w-[450px] h-[250px] mx-auto">
           <Image
@@ -399,16 +399,17 @@ export default function LumberjackGame() {
             className="object-contain drop-shadow-lg"
           />
         </div>
-        {/* X icon */}
-        <a
-          href="https://www.x.com/lumberCoin_"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center justify-center w-12 h-12 rounded-full bg-amber-900/80 hover:bg-amber-800/90 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110"
-        >
-          <Twitter className="w-8 h-8 text-white" />
-        </a>
       </div>
+
+      {/* X icon */}
+      <a
+        href="https://www.x.com/lumberCoin_"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="absolute top-4 right-4 z-[100] flex items-center justify-center w-12 h-12 rounded-full bg-amber-900/80 hover:bg-amber-800/90 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-110"
+      >
+        <Twitter className="w-8 h-8 text-white" />
+      </a>
 
       {!gameStarted && !gameOver && (
         <div className="relative flex justify-center items-center">
